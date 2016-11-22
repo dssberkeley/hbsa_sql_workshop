@@ -1,0 +1,49 @@
+SELECT AlbumId, Name, Milliseconds / 60000 AS min_length, UnitPrice AS up
+FROM Track
+WHERE min_length >= 5;
+
+SELECT Count(*)
+FROM Track;
+
+SELECT AVG(Milliseconds) AS avg_length
+FROM Track;
+
+SELECT DISTINCT Country
+FROM Customer;
+
+SELECT FirstName, LastName, Country, Phone
+FROM Customer
+WHERE Country = "Brazil";
+
+SELECT AlbumId, COUNT(AlbumId)
+FROM Track
+GROUP BY AlbumId;
+
+SELECT AlbumId, SUM(Milliseconds) /60000
+FROM Track
+GROUP BY AlbumId;
+
+SELECT Country, COUNT(Country)
+FROM Customer
+GROUP BY Country;
+
+SELECT BillingCountry, MAX(total)
+FROM (
+SELECT BillingCountry, SUM(Total) as total
+FROM Invoice
+GROUP BY BillingCountry
+) as ABC;
+
+SELECT BillingCountry, SUM(Total) as tot
+FROM Invoice
+GROUP BY BillingCountry
+HAVING tot > 100;
+
+SELECT ar.Name, al.Title
+FROM Artist ar INNER JOIN Album al
+ON ar.ArtistId = al.ArtistId;
+
+SELECT ar.Name, al.Title
+FROM Artist ar LEFT OUTER JOIN Album al
+ON ar.ArtistId = al.ArtistId;
+
